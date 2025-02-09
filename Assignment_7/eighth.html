@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort an Array Without sort()</title>
+</head>
+<body>
+  <h1>Sort an Array Without Using sort()</h1>
+  <label for="arrayInput">Enter numbers separated by commas:</label>
+  <input type="text" id="arrayInput" placeholder="e.g., 5, 2, 9, 1, 7">
+  <button id="sortAscending">Sort Ascending</button>
+  <button id="sortDescending">Sort Descending</button>
+  <p><strong>Results:</strong></p>
+  <div id="results">
+    <p>Sorted Array: <span id="sortedArray">[]</span></p>
+  </div>
+
+  <script>
+    function bubbleSort(array, order = "asc") {
+      for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length - 1 - i; j++) {
+          const shouldSwap =
+            (order === "asc" && array[j] > array[j + 1]) ||
+            (order === "desc" && array[j] < array[j + 1]);
+
+          if (shouldSwap) {
+            const temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
+          }
+        }
+      }
+      return array;
+    }
+
+    document.getElementById('sortAscending').addEventListener('click', function () {
+      const input = document.getElementById('arrayInput').value;
+      const array = input.split(',').map(Number).filter(num => !isNaN(num));
+      const sortedArray = bubbleSort(array.slice(), "asc");
+      document.getElementById('sortedArray').textContent = JSON.stringify(sortedArray);
+    });
+
+    document.getElementById('sortDescending').addEventListener('click', function () {
+      const input = document.getElementById('arrayInput').value;
+      const array = input.split(',').map(Number).filter(num => !isNaN(num));
+      const sortedArray = bubbleSort(array.slice(), "desc");
+      document.getElementById('sortedArray').textContent = JSON.stringify(sortedArray);
+    });
+  </script>
+</body>
+</html>

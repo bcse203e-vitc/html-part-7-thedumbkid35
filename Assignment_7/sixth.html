@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Duplicates in an Array</title>
+</head>
+<body>
+  <h1>Find Duplicates in an Array</h1>
+  <label for="arrayInput">Enter numbers or words separated by commas:</label>
+  <input type="text" id="arrayInput" placeholder="e.g., 1, 2, 3, 4, 2, 3">
+  <button id="findDuplicates">Find Duplicates</button>
+  <p><strong>Results:</strong></p>
+  <div id="results">
+    <p>Duplicate Values: <span id="duplicates">None</span></p>
+    <p>Unique Array: <span id="uniqueArray">[]</span></p>
+  </div>
+
+  <script>
+    document.getElementById('findDuplicates').addEventListener('click', function () {
+      const input = document.getElementById('arrayInput').value;
+      const array = input.split(',').map(item => item.trim());
+      const duplicates = [];
+      const uniqueSet = new Set();
+      const uniqueArray = [];
+
+      array.forEach(item => {
+        if (uniqueSet.has(item)) {
+          if (!duplicates.includes(item)) {
+            duplicates.push(item);
+          }
+        } else {
+          uniqueSet.add(item);
+          uniqueArray.push(item);
+        }
+      });
+
+      document.getElementById('duplicates').textContent = duplicates.length > 0 ? duplicates.join(', ') : "None";
+      document.getElementById('uniqueArray').textContent = JSON.stringify(uniqueArray);
+    });
+  </script>
+</body>
+</html>
